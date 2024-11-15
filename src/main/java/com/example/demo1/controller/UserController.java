@@ -18,9 +18,11 @@ public class UserController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user) {
         try {
             User newUser = userService.registerUser(user);
-            return ResponseEntity.ok(newUser);
+//            return ResponseEntity.ok(newUser);
+            return ResponseEntity.ok("User registered successfully!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+        
     }
 }

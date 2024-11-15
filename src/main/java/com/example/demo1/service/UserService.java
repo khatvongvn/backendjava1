@@ -3,7 +3,7 @@ import com.example.demo1.model.User;
 import com.example.demo1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.example.demo1.utils.PasswordUtils;
 import java.util.Optional;
 
 @Service
@@ -19,6 +19,9 @@ public class UserService {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new Exception("Email already exists");
         }
+        // Hash mật khẩu trước khi lưu
+        String hashedPassword = PasswordUtils.hashPassword(user.getPassword());
+        user.setPassword(hashedPassword);
         return userRepository.save(user);
     }
 }
